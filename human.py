@@ -6,8 +6,6 @@ class Human(Player):
         super().__init__()
 
     def choose_gesture(self):
-        print("Here are your choices.")
-        index = 0
+        print(f"{self.name}, here are your RPSLS gesture choices:")
         for gesture in self.gesture:
-            print(f"Press {index} for {gesture}")
-            index += 1
+            print(gesture)
