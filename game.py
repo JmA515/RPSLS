@@ -3,6 +3,7 @@ from ai import Artificial
 
 class Game:
     def __init__(self):
+        self.contestants = []
         pass
 
     def welcome_rules(self):
@@ -25,11 +26,19 @@ class Game:
     
     def game_mode(self):
         game_choice = int(input("How will you be playing?\n"
-        "(Press 1) for single player\n"
-        "(Press 2) for multiplayer  "))
+        "Type (1) for single player\n"
+        "Type (2) for multiplayer  "))
         if game_choice == 1:
+            ai_player = Artificial()
+            self.contestants.append(ai_player)
+            human_player1 = Human()
+            self.contestants.append(human_player1)
             self.ai_game()
         elif game_choice == 2:
+            human_player1 = Human()
+            self.contestants.append(human_player1)
+            human_player2 = Human()
+            self.contestants.append(human_player2)
             self.human_game()
         else:
             self.game_mode()
@@ -50,14 +59,12 @@ class Game:
             # self.ai_turn()
 
     def ai_turn(self):
-        ai_player = Artificial()
-        ai_player_choice = ai_player.choose_gesture()
+        ai_player_choice = self.contestants[0].choose_gesture()
         print(ai_player_choice)
         pass
 
     def human1_turn(self):
-        human_player1 = Human()
-        human_player1.choose_gesture()
+        self.contestants[1].choose_gesture()
         human1_choice = self.valid_answer()
         print(human1_choice)
 
@@ -71,7 +78,7 @@ class Game:
         while True:
             choice = input("Please type your RPSLS gesture choice here: ").casefold()
             if choice.lower() not in ("rock", "paper", "scissors", "lizard", "spock"):
-                print("Please retype your gesture choice.")
+                print("Please re-type your gesture choice.")
             else:
                 break
         return choice
