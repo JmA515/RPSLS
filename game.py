@@ -25,8 +25,8 @@ class Game:
     
     def game_mode(self):
         game_choice = int(input("How will you be playing?\n"
-        "('1') vs AI\n"
-        "('2') vs human?"))
+        "(Press 1) for single player\n"
+        "(Press 2) for multiplayer  "))
         if game_choice == 1:
             self.ai_game()
         elif game_choice == 2:
@@ -36,17 +36,42 @@ class Game:
         pass
 
     def ai_game(self):
-        human_player1 = Human()
+        self.human1_turn()
+        self.ai_turn()
+
+
+        self.human1_turn()
+        self.ai_turn()
+      
+
+        #if 1 player has 2 round wins, game over 
+        #else
+            # self.human1_turn()
+            # self.ai_turn()
+
+    def ai_turn(self):
         ai_player = Artificial()
-        human_player1.choose_gesture()
-        human1_choice = input("Please type your RPSLS gesture choice here: ")
         ai_player_choice = ai_player.choose_gesture()
-        print(human1_choice)
         print(ai_player_choice)
         pass
+
+    def human1_turn(self):
+        human_player1 = Human()
+        human_player1.choose_gesture()
+        human1_choice = self.valid_answer()
+        print(human1_choice)
 
     def human_game(self):
         pass        
 
     def run_game(self):
         pass
+
+    def valid_answer(self):
+        while True:
+            choice = input("Please type your RPSLS gesture choice here: ").casefold()
+            if choice.lower() not in ("rock", "paper", "scissors", "lizard", "spock"):
+                print("Please retype your gesture choice.")
+            else:
+                break
+        return choice
