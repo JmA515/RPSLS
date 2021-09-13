@@ -51,7 +51,10 @@ class Game:
         human_round1 = self.human1_turn(1)
         ai_round1 = self.ai_turn()
         round_one_winner = self.find_round_winner(human_round1, ai_round1)
+        print("\n")
+        print(f'{self.contestants[1].name} chose {human_round1} and\n{self.contestants[0].name} chose {ai_round1}')
         print(round_one_winner)
+        print("\n")
         if round_one_winner == f'{self.contestants[1].name} wins!':
             human_winner_counter += 1
         elif round_one_winner == f'{self.contestants[0].name} wins!':
@@ -60,6 +63,7 @@ class Game:
         human_round2 = self.human1_turn(1)
         ai_round2 = self.ai_turn()
         round_two_winner = self.find_round_winner(human_round2, ai_round2)
+        print(f'{self.contestants[1].name} chose {human_round2} and\n{self.contestants[0].name} chose {ai_round2}')
         print(round_two_winner)
         if round_two_winner == f'{self.contestants[1].name} wins!':
             human_winner_counter += 1
@@ -73,6 +77,7 @@ class Game:
             human_round3 = self.human1_turn(1)
             ai_round3 = self.ai_turn()
             round_three_winner = self.find_round_winner(human_round3, ai_round3)
+            print(f'{self.contestants[1].name} chose {human_round3} and\n{self.contestants[0].name} chose {ai_round3}')
             print(round_three_winner)
             if round_three_winner == f'{self.contestants[1].name} wins!':
                 human_winner_counter += 1
@@ -92,13 +97,11 @@ class Game:
 
     def ai_turn(self):
         ai_player_choice = self.contestants[0].choose_gesture()
-        print(ai_player_choice)
         return ai_player_choice
 
     def human1_turn(self, index_number):
         self.contestants[index_number].choose_gesture()
         human1_choice = self.valid_answer()
-        print(human1_choice)
         return human1_choice
 
     def human_game(self):
@@ -108,6 +111,7 @@ class Game:
         human1_round1 = self.human1_turn(1)
         human2_round1 = self.human1_turn(0)
         round_one_winner = self.find_round_winner(human1_round1, human2_round1)
+        print(f'{self.contestants[1].name} chose {human1_round1} and\n{self.contestants[0].name} chose {human2_round1}')
         print(round_one_winner)
         if round_one_winner == f'{self.contestants[1].name} wins!':
             human1_winner_counter += 1
@@ -117,6 +121,7 @@ class Game:
         human1_round2 = self.human1_turn(1)
         human2_round2 = self.human1_turn(0)
         round_two_winner = self.find_round_winner(human1_round2, human2_round2)
+        print(f'{self.contestants[1].name} chose {human1_round2} and\n{self.contestants[0].name} chose {human2_round2}')
         print(round_two_winner)
         if round_two_winner == f'{self.contestants[1].name} wins!':
             human1_winner_counter += 1
@@ -130,6 +135,7 @@ class Game:
             human1_round3 = self.human1_turn(1)
             human2_round3 = self.human1_turn(0)
             round_three_winner = self.find_round_winner(human1_round3, human2_round3)
+            print(f'{self.contestants[1].name} chose {human1_round3} and\n{self.contestants[0].name} chose {human2_round3}')
             print(round_three_winner)
             if round_three_winner == f'{self.contestants[1].name} wins!':
                 human1_winner_counter += 1
