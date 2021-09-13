@@ -45,20 +45,50 @@ class Game:
         pass
 
     def ai_game(self):
-        human_turn1 = self.human1_turn()
-        ai_turn1 = self.ai_turn()
-        round_one_winner = self.find_winner(human_turn1, ai_turn1)
+        human_winner_counter = 0
+        ai_winner_counter = 0
+
+        human_round1 = self.human1_turn()
+        ai_round1 = self.ai_turn()
+        round_one_winner = self.find_round_winner(human_round1, ai_round1)
         print(round_one_winner)
+        if round_one_winner == f'{self.contestants[1].name} wins!':
+            human_winner_counter += 1
+        elif round_one_winner == f'{self.contestants[0].name} wins!':
+            ai_winner_counter += 1
         
-        human_turn2 = self.human1_turn()
-        ai_turn2 = self.ai_turn()
-        round_two_winner = self.find_winner(human_turn2, ai_turn2)
+        human_round2 = self.human1_turn()
+        ai_round2 = self.ai_turn()
+        round_two_winner = self.find_round_winner(human_round2, ai_round2)
         print(round_two_winner)
-        
-        #if 1 player has 2 round wins, game over 
-        #else
-            # self.human1_turn()
-            # self.ai_turn()
+        if round_two_winner == f'{self.contestants[1].name} wins!':
+            human_winner_counter += 1
+        elif round_two_winner == f'{self.contestants[0].name} wins!':
+            ai_winner_counter += 1
+        if human_winner_counter == 2:
+            print(f'{self.contestants[1].name} wins!!!')
+        elif ai_winner_counter == 2:
+            print(f'{self.contestants[0].name} wins!!!\n''Better luck next time! ¯\_(ツ)_/¯')
+        elif human_winner_counter < 2 and ai_winner_counter < 2:
+            human_round3 = self.human1_turn()
+            ai_round3 = self.ai_turn()
+            round_three_winner = self.find_round_winner(human_round3, ai_round3)
+            print(round_three_winner)
+            if round_three_winner == f'{self.contestants[1].name} wins!':
+                human_winner_counter += 1
+            elif round_three_winner == f'{self.contestants[0].name} wins!':
+                ai_winner_counter += 1
+            
+            if human_winner_counter >= 2:
+                print(f'{self.contestants[1].name} wins!!!')
+            elif ai_winner_counter >= 2:
+                print(f'{self.contestants[0].name} wins!!!\n''Better luck next time! ¯\_(ツ)_/¯')
+            elif human_winner_counter == 1 and ai_winner_counter == 0:
+                print(f'{self.contestants[1].name} wins!!!') 
+            elif ai_winner_counter == 1 and human_winner_counter == 0:
+                print(f'{self.contestants[0].name} wins!!!\n''Better luck next time! ¯\_(ツ)_/¯')
+            elif human_winner_counter == ai_winner_counter:
+                print("How does it feel to tie and win nothing?! Sucks right?\n""Play again because if you ain't first, you're last!")
 
     def ai_turn(self):
         ai_player_choice = self.contestants[0].choose_gesture()
@@ -86,13 +116,13 @@ class Game:
                 break
         return choice
 
-    def find_winner(self, human1_choice, ai_player_choice):
+    def find_round_winner(self, human1_choice, ai_player_choice):
         if human1_choice == ai_player_choice:
             return"It's a tie."
 
         elif human1_choice == "rock":   
             if ai_player_choice == "scissors" or ai_player_choice ==  "lizard":
-                return f'{self.contestants[1].name} wins'
+                return f'{self.contestants[1].name} wins!'
             elif ai_player_choice == "spock" or ai_player_choice == "paper":
                 return f'{self.contestants[0].name} wins!'
 
