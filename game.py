@@ -45,14 +45,16 @@ class Game:
         pass
 
     def ai_game(self):
-        self.human1_turn()
-        self.ai_turn()
-
-
-        self.human1_turn()
-        self.ai_turn()
-      
-
+        human_turn1 = self.human1_turn()
+        ai_turn1 = self.ai_turn()
+        round_one_winner = self.find_winner(human_turn1, ai_turn1)
+        print(round_one_winner)
+        
+        human_turn2 = self.human1_turn()
+        ai_turn2 = self.ai_turn()
+        round_two_winner = self.find_winner(human_turn2, ai_turn2)
+        print(round_two_winner)
+        
         #if 1 player has 2 round wins, game over 
         #else
             # self.human1_turn()
@@ -61,12 +63,13 @@ class Game:
     def ai_turn(self):
         ai_player_choice = self.contestants[0].choose_gesture()
         print(ai_player_choice)
-        pass
+        return ai_player_choice
 
     def human1_turn(self):
         self.contestants[1].choose_gesture()
         human1_choice = self.valid_answer()
         print(human1_choice)
+        return human1_choice
 
     def human_game(self):
         pass        
@@ -82,3 +85,37 @@ class Game:
             else:
                 break
         return choice
+
+    def find_winner(self, human1_choice, ai_player_choice):
+        if human1_choice == ai_player_choice:
+            return"It's a tie."
+
+        elif human1_choice == "rock":   
+            if ai_player_choice == "scissors" or ai_player_choice ==  "lizard":
+                return f'{self.contestants[1].name} wins'
+            elif ai_player_choice == "spock" or ai_player_choice == "paper":
+                return f'{self.contestants[0].name} wins!'
+
+        elif human1_choice == "paper":
+            if ai_player_choice == "spock" or ai_player_choice == "rock":   
+                return f'{self.contestants[1].name} wins!'
+            elif ai_player_choice == "lizard" or ai_player_choice == "scissors":
+                return f'{self.contestants[0].name} wins!'
+
+        elif human1_choice == "scissors":
+            if ai_player_choice == "paper" or ai_player_choice == "lizard":
+                return f'{self.contestants[1].name} wins!'
+            elif ai_player_choice == "rock" or ai_player_choice == "spock":
+                return f'{self.contestants[0].name} wins!'
+
+        elif human1_choice == "lizard":
+            if ai_player_choice == "spock" or ai_player_choice == "paper":
+                return f'{self.contestants[1].name} wins!'
+            elif ai_player_choice == "rock" or ai_player_choice == "scissors":
+                return f'{self.contestants[0].name} wins!'
+
+        elif human1_choice == "spock":
+            if ai_player_choice == "rock" or ai_player_choice == "scissors":
+                return f'{self.contestants[1].name} wins!'
+            elif ai_player_choice == "paper" or ai_player_choice == "lizard":
+                return f'{self.contestants[0].name} wins!'
