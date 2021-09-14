@@ -1,4 +1,5 @@
 from game import Game
 
-ai_game_test = Game()
-ai_game_test.game_mode()
+game_play = Game()
+
+game_play.run_game()

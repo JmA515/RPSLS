@@ -10,3 +10,4 @@ class Human(Player):
         print(f"{self.name}, here are your RPSLS gesture choices:")
         for gesture in self.gesture:
             print(gesture)
+            print("\n")
